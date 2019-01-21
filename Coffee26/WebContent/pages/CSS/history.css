@@ -1,0 +1,413 @@
+/* ==================================================
+				General
+================================================== */
+html {
+}
+
+body {
+	font-family: "Cormorant Garamond", Georgia, serif;
+	font-size: 18px;
+	line-height: 1.7;
+	color: rgba(255, 255, 255, 0.3);
+	background: url(../images/background.png);
+}
+
+html, body {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+div {
+	overflow: hidden;
+	padding: 10px;
+}
+
+a {
+	color: #ea272d;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
+	transition: 0.5s;
+}
+
+a:hover, a:active, a:focus {
+	color: #ea272d;
+	outline: none;
+	text-decoration: none;
+}
+
+nav {
+	position: fixed;
+	width: 100%;
+	left: 0;
+	right: 0;
+	background: transparent;
+	z-index: 1001;
+	top: 0;
+	padding: 0px;
+	-webkit-transition: 0.3s;
+	-o-transition: 0.3s;
+	transition: 0.3s;
+}
+
+header {
+	background-image: url(../images/headerBg3.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	position: relative;
+}
+
+hr {
+	margin: 0px;
+	height: 0px;
+	border: none;
+	border-top: 3px solid #666666;
+}
+
+img {
+	max-height:100%;
+	max-width:100%;
+}
+
+
+
+/* ==================================================
+				Bar
+================================================== */
+.bar {
+	background-color: #191919;
+	display: flex;
+}
+
+.logo {
+	position: absolute;
+	top: 30%;
+	left: 45%;
+}
+
+.logo h1 {
+	margin: 0;
+}
+
+.logo h1 a {
+	display: block;
+	font-weight: bold;
+}
+
+.options {
+	text-align: center;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.options ul {
+	margin: 0;
+	padding: 0;
+}
+
+.options ul li {
+	list-style-type: none;
+	display: inline-block;
+	margin: 1em 5em;
+}
+
+.options ul li:nth-child(2) {
+	margin-right: 30em;
+}
+
+.options li a {
+	color: white;
+	font-size: 20px;
+	padding: 0;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.options li a:hover, .options li a.active {
+	color: red;
+}
+
+
+
+/* ==================================================
+				Home
+================================================== */
+.display-info h1 {
+	color: white;
+	margin: 0px;
+	font-size: 60px;
+}
+
+.display-info h2 {
+	color: white;
+	margin: 0px;
+	font-size: 40px;
+}
+
+.content-item {
+	display: flex;
+	justify-content: space-around;
+}
+
+.content-item h3 {
+	color: white;
+}
+
+.content-info {
+	width: 600px;
+	border: 3px dotted #666666;
+	padding: 0 50px;
+}
+
+.content-info h2 {
+	color: white;
+	font-size: 35px;
+	margin-bottom: 2px;
+}
+
+.preview-content {
+	display: flex;
+	justify-content: space-around;
+}
+
+.preview-content1 {
+	background-image: url(../images/preview1.PNG);
+}
+
+.preview-content2 {
+	background-image: url(../images/preview2.PNG);
+}
+
+.preview-content3 {
+	background-image: url(../images/preview3.PNG);
+}
+
+.preview-content4 {
+	background-image: url(../images/preview4.PNG);
+}
+
+.preview-content1, .preview-content2, .preview-content3, .preview-content4 {
+	width: 360px;
+	height: 240px;
+	background-size: 100% 100%;
+	background-repeat: none;
+}
+
+.preview-content1 p, .preview-content2 p, .preview-content3 p, .preview-content4 p {
+	font-family: "SimHei", Georgia, serif;
+	text-align: center;
+	font-size: 80px;
+	font-weight: bold;
+	color: white;
+	margin-top: 50px;
+}
+
+#blank {
+	background-image: url(../images/headerBg3.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	position: relative;
+}
+
+.footer-content {
+	display: flex;
+	justify-content: space-around;
+}
+
+.footer-links p {
+	margin: 0px;
+}
+
+.footer-links a {
+	color: rgba(255, 255, 255, 0.3);
+	padding: 0;
+}
+
+.footer-links a:hover, .footer-links a.active {
+	color: red;
+}
+
+
+
+/* ==================================================
+				Menu
+================================================== */
+.menu-content {
+	display: flex;
+	justify-content: space-around;
+}
+
+.menu-list {
+	float: left;
+}
+
+.show {
+	float: right;
+}
+
+
+
+/* ==================================================
+				My
+================================================== */
+.personal-information {
+	display: flex;
+	justify-content: space-around;
+}
+
+
+
+/* ==================================================
+				Log In
+================================================== */
+#logIn {
+	background-color: #cfcfcf;
+}
+
+.header-top-right{
+	float:right;
+	margin:1.3em 0 0;
+}
+/*--Login --*/
+#loginContainer {
+    position:relative;
+}
+#loginContainer a span{
+  display:block;
+}
+/* Login Button */
+#loginButton { 
+    display:inline-block;  
+    position:relative;
+    z-index:30;
+    cursor:pointer;
+}
+/* Login Box */
+#loginBox {
+    position:absolute;
+	top: 9%;
+    right: 13%;
+    z-index:99999;
+}
+#loginForm:after {
+	content: '';
+    position: absolute;
+    right: 25px;
+    top: -10px;
+    border-left: 10px solid rgba(0, 0, 0, 0);
+    border-right: 10px solid rgba(0, 0, 0, 0);
+    border-bottom: 10px solid #CAC9C9;
+}
+/* Login Form */
+#loginForm {
+   width: 300px;
+	background: #fff;
+	border: 1px solid #d6d6d6;
+}
+#loginForm fieldset {
+    margin:0 0 15px 0;
+    display:block;
+    border:0;
+    padding:0;
+}
+fieldset#body {
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    -o-border-radius:3px;
+    padding:15px 15px;
+    margin:0;
+}
+#loginForm #checkbox {
+    width:auto;
+    margin:3px 6px 0 0;
+    float:left;
+    padding:0;
+    border:0;
+    *margin:-3px 9px 0 0; /* IE7 Fix */
+}
+#body label {
+    color:#87807c;
+    margin:10px 0 0 0;
+    display:block;
+    float:left;
+    font-size:0.9em;
+}
+#loginForm #body fieldset label{
+    display:block;
+    float:none;
+    margin:0 0 6px 0;
+	font-weight: 500;
+    font-size: 13px;
+}
+#body label i {
+    color: #F07818;
+    font-size: 13px;
+    font-weight: 500;
+}
+/* Default Input */
+#loginForm input {
+    width:92%;
+    border:1px solid #DADADA;
+	color: #222;
+	background:#FFF;
+    padding:6px;
+	font-size: 0.9em;
+    -webkit-apperance:none;
+}
+/* Sign In Button */
+#loginForm #login {
+    background: #42517B;
+    color: #fff;
+    font-size: 1em;
+    padding: 5px 20px;
+	font-weight:300;
+    /* margin: 0; */
+    transition: all .5s;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    font-family: 'Oswald', sans-serif;
+}
+#loginForm #login:hover {
+	background: #fff;
+	color: #42517B;
+}
+/* Forgot your password */
+#loginForm span {
+    display: block;
+    padding-bottom: 15px;
+    text-align: center;
+}
+#loginForm span a{
+    font-weight:100;
+	color:#999;
+	font-size:14px;
+}
+#loginForm span a:hover{
+	text-decoration:none;
+	color:#000;
+}
+input:focus {
+    outline:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

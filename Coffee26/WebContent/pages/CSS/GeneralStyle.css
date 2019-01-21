@@ -1,0 +1,189 @@
+/* ============================================
+				General
+				网页总体风格，组件基本属性
+============================================ */
+html {
+}
+
+body {
+	font-family: "Cormorant Garamond", Georgia, serif;
+	font-size: 18px;
+	line-height: 1.7;
+	color: rgba(255, 255, 255, 0.3);
+	background: #000 url(../images/background.png) repeat;
+}
+
+html, body {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+div {
+	overflow: hidden;
+	padding: 10px;
+}
+
+a {
+	color: #ea272d;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
+	transition: 0.5s;
+}
+
+a:hover, a:active, a:focus {
+	color: #ea272d;
+	outline: none;
+	text-decoration: none;
+}
+
+nav {
+	position: fixed;
+	width: 100%;
+	left: 0;
+	right: 0;
+	background: transparent;
+	z-index: 1001;
+	top: 0;
+	padding: 0px;
+	-webkit-transition: 0.3s;
+	-o-transition: 0.3s;
+	transition: 0.3s;
+}
+
+header {
+	background-image: url(../images/backgroundPic1.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	position: relative;
+}
+
+hr {
+	margin: 0px;
+	height: 0px;
+	border: none;
+	border-top: 3px solid #666666;
+}
+
+img {
+	max-height:100%;
+	max-width:100%;
+}
+
+
+
+/* ============================================================
+				Bar | Header | Blank | Footer
+				导航栏、头块、空白块、尾块（四个公共块）
+				导航栏：存放链接；头块、空白块、尾块：装饰效果
+============================================================ */
+/* ================================
+				Bar
+================================ */
+.bar {
+	background-color: #191919;
+	display: flex;
+}
+
+.bar .logo {
+	position: absolute;
+	top: 30%;
+	left: 44%;
+}
+
+.bar .logo h1 {
+	margin: 0px;
+}
+
+.bar .logo a {
+	display: block;
+	font-weight: bold;
+}
+
+.bar .options {
+	text-align: center;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.bar .options ul {
+	margin: 0;
+	padding: 0;
+}
+
+.bar .options li {
+	list-style-type: none;
+	display: inline-block;
+	margin: 1em 5em;
+}
+
+.bar .options li:nth-child(2) {
+	margin-right: 30em;
+}
+
+.bar .options a {
+	color: white;
+	font-size: 20px;
+	padding: 0;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.bar .options a:hover, .options a.active {
+	color: red;
+}
+
+/* ================================
+				Header
+================================ */
+.header .info h1, .header .info h2 {
+	color: white;
+	margin: 0px;
+}
+
+.header .info h1 {
+	font-size: 60px;
+}
+
+.header .info h2 {
+	font-size: 35px;
+}
+
+/* =================================
+				Blank
+================================= */
+.blank {
+	background-image: url(../images/backgroundPic2.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	position: relative;
+}
+
+.blank div {
+	height: 300px;
+}
+
+/* =================================
+				Footer
+================================= */
+.footer .content {
+	display: flex;
+	justify-content: space-around;
+}
+
+.footer .links p {
+	margin: 0px;
+}
+
+.footer .links a {
+	color: rgba(255, 255, 255, 0.3);
+	padding: 0;
+}
+
+.footer .links a:hover, .footer .links a.active {
+	color: red;
+}
+
+

@@ -1,0 +1,80 @@
+/* ============================================================
+				Management
+				管理员管理菜单和用户
+============================================================ */
+.allUsers table, th, td {
+	border: 0px solid #666666;
+	border-left-width: 0px;
+	border-right-width: 0px;
+}
+
+.allUsers table {
+	border-top-width: 3px;
+	border-bottom-width: 3px;
+	border-collapse: collapse;
+	width: 80%;
+}
+
+.allUsers th {
+	border-top-width: 3px;
+	border-bottom-width: 3px;
+	height: 80px;
+	font-size: 25px;
+	color: white;
+}
+
+.allUsers td {
+	border-top-width: 2px;
+	border-bottom-width: 2px;
+	width: 200px;
+	height: 16px;
+	color: white;
+	text-align: center;
+}
+
+.allUsers input {
+	border: 0px;
+	border-bottom: #000000 2px solid;
+	font-size: 16px;
+}
+
+.allUsers .add-user-div table {
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+	width: 460px;
+}
+
+.allUsers .add-user-div td {
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+	text-align: right;
+}
+
+.allUsers .btn, .user-info-form .btn {
+	background-color: #e7e7e7;
+	color: black;
+	border: none;
+	padding: 10px 16px;
+	width: 120px;
+	border-radius: 4px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	transition-duration: 0.4s;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.allUsers .btn:hover, .user-info-form .btn:hover {
+	background-color: #b4b4b4;
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 16px 50px 0 rgba(0,0,0,0.2);
+}
+
+.allUsers .btn:active, .user-info-form .btn:active {
+	background-color: #b4b4b4;
+	box-shadow: 0 9px 12px 0 rgba(0,0,0,0.24), 0 12px 36px 0 rgba(0,0,0,0.2);
+	transform: translateY(2px);
+}
+
+

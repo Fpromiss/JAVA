@@ -1,0 +1,69 @@
+/* =============================================
+				Home
+				Home.jsp 首页的组件样式
+============================================= */
+.selected .item {
+	display: flex;
+	justify-content: space-around;
+}
+
+.selected .item h3 {
+	color: white;
+}
+
+.selected .info {
+	width: 600px;
+	border: 3px dotted #666666;
+	padding: 0 50px;
+}
+
+.selected .info h2 {
+	color: white;
+	font-size: 35px;
+	margin-bottom: 2px;
+}
+
+.preview .content {
+	display: flex;
+	justify-content: space-around;
+}
+
+.preview .content p {
+	font-family: "SimHei", Georgia, serif;
+	text-align: center;
+	font-size: 80px;
+	font-weight: bold;
+	color: white;
+	margin-top: 50px;
+}
+
+.preview .content1 {
+	background-image: url(../images/homePreview1.PNG);
+}
+
+.preview .content2 {
+	background-image: url(../images/homePreview2.PNG);
+}
+
+.preview .content3 {
+	background-image: url(../images/homePreview3.PNG);
+}
+
+.preview .content4 {
+	background-image: url(../images/homePreview4.PNG);
+}
+
+.preview .content1, .preview .content2,
+.preview .content3, .preview .content4 {
+	width: 360px;
+	height: 240px;
+	background-size: 100% 100%;
+	background-repeat: none;
+}
+
+.preview .content1:hover, .preview .content2:hover,
+.preview .content3:hover, .preview .content4:hover {
+	cursor: pointer;
+}
+
+
