@@ -63,11 +63,8 @@ class Solution {
         for(int i = 0; i < nums.length; i++){
             int targetKey = target - nums[i];
             if(sumMap.containsKey(targetKey)){
-                if(nums[i]!=nums[sumMap.get(targetKey)]){
                     result[0] = sumMap.get(targetKey);
                     result[1] = i;
-                    break;
-                }
             }
             sumMap.put(nums[i],i);
         }
