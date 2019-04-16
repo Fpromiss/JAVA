@@ -31,6 +31,26 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+    <!-- 引入mysql相关 -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.41</version>
+    </dependency>
+    <!-- 声明使用阿里巴巴的druid连接池 -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.1.3</version>
+    </dependency>
+    <!-- springboot对mybatis的支持 -->
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -40,6 +60,7 @@
   </dependencies>
 
   <build>
+    <!-- 第一次下core jar包时候需要把 pluginManagement这一层删去-->
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
@@ -80,6 +101,45 @@
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.mybatis.generator</groupId>
+          <artifactId>mybatis-generator-maven-plugin</artifactId>
+          <version>1.3.5</version>
+          <dependencies>
+            <!-- 声明需要生成maven plugin需要的dependency -->
+            <dependency>
+              <groupId>org.mybatis.generator</groupId>
+              <artifactId>mybatis-generator-core</artifactId>
+              <version>1.3.5</version>
+            </dependency>
+            <!-- 需要对mysql数据库解析 所以需要mysql对应的connector-->
+            <dependency>
+              <groupId>mysql</groupId>
+              <artifactId>mysql-connector-java</artifactId>
+              <version>5.1.41</version>
+            </dependency>
+          </dependencies>
+          <executions>
+            <execution>
+              <id>mybatis generator</id>
+              <phase>package</phase>
+              <goals>
+                <goal>generate</goal>
+              </goals>
+            </execution>
+          </executions>
+          <!--考虑到可能会有反复生成文件的情况-->
+          <configuration>
+            <!-- 允许移动生成的文件 -->
+            <verbose>true</verbose>
+            <!-- 允许自动覆盖的文件，合作情况千万别！ -->
+            <overwrite>true</overwrite>
+            <!--mybatis generator 的配置路径-->
+            <configurationFile>
+                src/main/resources/mybatis-generator.xml
+            </configurationFile>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
