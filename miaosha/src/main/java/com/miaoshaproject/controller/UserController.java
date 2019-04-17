@@ -8,10 +8,11 @@ import com.miaoshaproject.service.UserService;
 import com.miaoshaproject.service.model.UserModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author : Fpromiss
@@ -52,6 +53,16 @@ public class UserController {
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(userModel, userVO);
         return userVO;
+    }
+
+    // 定义exceptionhandler解决未被controller层吸收的exception
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Object handlerException(HttpServletRequest request, Exception ex){
+        CommonReturnType commonReturnType = new CommonReturnType();
+        commonReturnType.setStatus("fail");
+        commonReturnType.setData(ex);
+        return commonReturnType;
     }
 
 }
