@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Random;
+
 
 /**
  * @author : Fpromiss
@@ -20,6 +23,28 @@ import org.springframework.web.bind.annotation.*;
 public class UserController extends BaseController{
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private HttpServletRequest httpServletRequest; // 虽然是单例，但是本质是一个Proxy
+
+    // 用户获取opt短信接口
+    @RequestMapping("/getOpt")
+    @ResponseBody
+    public CommonReturnType getOtp(@RequestParam(name="telphone")String telphone){
+        // 需要按照一定的规则生成OPT验证码
+        Random random = new Random();
+        int randomInt = random.nextInt(99999);
+        randomInt = randomInt + 10000;
+        String optCode = String.valueOf(randomInt);
+
+        // 将OPT验证码同对应用户的手机号关联,使用http session 的方式绑定手机号与optCode
+        httpServletRequest.getSession().setAttribute(telphone, optCode);
+
+        // 将OPT验证码通过短信通道发送给用户(省略)
+        System.out.println("telphone = " + telphone + " & optCode = " + optCode);
+        return CommonReturnType.create(null);
+    }
+
 
     @RequestMapping("/get")
     @ResponseBody
