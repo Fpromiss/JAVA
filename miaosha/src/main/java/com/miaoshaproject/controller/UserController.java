@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author : Fpromiss
@@ -60,9 +62,13 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Object handlerException(HttpServletRequest request, Exception ex){
+        BusinessException businessException = (BusinessException) ex;
         CommonReturnType commonReturnType = new CommonReturnType();
         commonReturnType.setStatus("fail");
-        commonReturnType.setData(ex);
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("errorCode", businessException.getErrorCode());
+        responseData.put("errorMsg",businessException.getErrorMsg());
+        commonReturnType.setData(responseData);
         return commonReturnType;
     }
 
