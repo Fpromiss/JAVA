@@ -33,7 +33,8 @@ public class UserController {
 
         // 若获取的对应用户信息不存在
         if(userModel == null){
-            throw new BusinessException(EmBusinessError.USER_NOT_EXIST);
+            userModel.setEncrptPassword("123");
+            // throw new BusinessException(EmBusinessError.USER_NOT_EXIST);
         }
 
         // 将核心领域模型用户对象转换为可供UI使用的viewobject
@@ -62,14 +63,16 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Object handlerException(HttpServletRequest request, Exception ex){
-        BusinessException businessException = (BusinessException) ex;
-        CommonReturnType commonReturnType = new CommonReturnType();
-        commonReturnType.setStatus("fail");
         Map<String, Object> responseData = new HashMap<>();
-        responseData.put("errorCode", businessException.getErrorCode());
-        responseData.put("errorMsg",businessException.getErrorMsg());
-        commonReturnType.setData(responseData);
-        return commonReturnType;
+        if(ex instanceof BusinessException){
+            BusinessException businessException = (BusinessException) ex;
+            responseData.put("errorCode", businessException.getErrorCode());
+            responseData.put("errorMsg",businessException.getErrorMsg());
+        }else{
+            responseData.put("errorCode", EmBusinessError.UNKNOWN_ERROR.getErrorCode());
+            responseData.put("errorMsg",EmBusinessError.UNKNOWN_ERROR.getErrorMsg());
+        }
+        return CommonReturnType.create(responseData,"fail");
     }
 
 }
