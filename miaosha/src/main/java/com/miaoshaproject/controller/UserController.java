@@ -58,6 +58,7 @@ public class UserController {
     // 定义exceptionhandler解决未被controller层吸收的exception
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
     public Object handlerException(HttpServletRequest request, Exception ex){
         CommonReturnType commonReturnType = new CommonReturnType();
         commonReturnType.setStatus("fail");
