@@ -20,6 +20,7 @@ import java.util.Random;
  */
 @Controller("user")
 @RequestMapping("/user")
+@CrossOrigin // 解决跨域访问问题
 public class UserController extends BaseController{
     @Autowired
     private UserService userService;
@@ -28,7 +29,7 @@ public class UserController extends BaseController{
     private HttpServletRequest httpServletRequest; // 虽然是单例，但是本质是一个Proxy
 
     // 用户获取opt短信接口
-    @RequestMapping("/getOpt")
+    @RequestMapping(value = "/getotp",method = {RequestMethod.POST},consumes = {CONTENT_TYPE_FORMED})
     @ResponseBody
     public CommonReturnType getOtp(@RequestParam(name="telphone")String telphone){
         // 需要按照一定的规则生成OPT验证码
