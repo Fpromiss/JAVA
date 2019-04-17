@@ -8,20 +8,16 @@ import com.miaoshaproject.service.UserService;
 import com.miaoshaproject.service.model.UserModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author : Fpromiss
  */
 @Controller("user")
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
     @Autowired
     private UserService userService;
 
@@ -33,8 +29,7 @@ public class UserController {
 
         // 若获取的对应用户信息不存在
         if(userModel == null){
-            userModel.setEncrptPassword("123");
-            // throw new BusinessException(EmBusinessError.USER_NOT_EXIST);
+            throw new BusinessException(EmBusinessError.USER_NOT_EXIST);
         }
 
         // 将核心领域模型用户对象转换为可供UI使用的viewobject
@@ -57,22 +52,4 @@ public class UserController {
         BeanUtils.copyProperties(userModel, userVO);
         return userVO;
     }
-
-    // 定义exceptionhandler解决未被controller层吸收的exception
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public Object handlerException(HttpServletRequest request, Exception ex){
-        Map<String, Object> responseData = new HashMap<>();
-        if(ex instanceof BusinessException){
-            BusinessException businessException = (BusinessException) ex;
-            responseData.put("errorCode", businessException.getErrorCode());
-            responseData.put("errorMsg",businessException.getErrorMsg());
-        }else{
-            responseData.put("errorCode", EmBusinessError.UNKNOWN_ERROR.getErrorCode());
-            responseData.put("errorMsg",EmBusinessError.UNKNOWN_ERROR.getErrorMsg());
-        }
-        return CommonReturnType.create(responseData,"fail");
-    }
-
 }
