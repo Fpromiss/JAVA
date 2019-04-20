@@ -4,12 +4,16 @@ import com.miaoshaproject.dao.UserDOMapper;
 import com.miaoshaproject.dao.UserPasswordDOMapper;
 import com.miaoshaproject.dataobject.UserDO;
 import com.miaoshaproject.dataobject.UserPasswordDO;
+import com.miaoshaproject.error.BusinessException;
+import com.miaoshaproject.error.EmBusinessError;
 import com.miaoshaproject.service.UserService;
 import com.miaoshaproject.service.model.UserModel;
 import org.apache.catalina.User;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,6 +36,65 @@ public class UserServiceImpl implements UserService {
         UserPasswordDO userPasswordDO = userPasswordDOMapper.selectByUserId(userDO.getId());
         return convertFromDataObejce(userDO, userPasswordDO);
     }
+
+    @Override
+    @Transactional
+    public void register(UserModel userModel) throws BusinessException{
+        // 对象为空
+        if(userModel == null){
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        // 某项为空
+        if(StringUtils.isEmpty(userModel.getName())
+            || userModel.getGender() == null
+            || userModel.getAge() == null
+            || StringUtils.isEmpty(userModel.getTelphone())) {
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        // 实现 model -> dataoObject
+        UserDO userDO = convertFromModel(userModel);
+        userDOMapper.insertSelective(userDO);
+
+        UserPasswordDO userPasswordDO = convertPasswordFromModel(userModel);
+        userPasswordDOMapper.insertSelective(userPasswordDO);
+
+        return;
+    }
+
+
+    /**
+     * 实现 model -> passwordDO
+     *
+     * @param userModel
+     * @return
+     */
+    private UserPasswordDO convertPasswordFromModel(UserModel userModel){
+        if(userModel == null){
+            return null;
+        }
+        UserPasswordDO userPasswordDO = new UserPasswordDO();
+        userPasswordDO.setEncrptPassword(userModel.getEncrptPassword());
+        userPasswordDO.setUserId(userModel.getId());
+        return userPasswordDO;
+    }
+
+
+
+    /**
+     * 实现 model -> dataoObject
+     *
+     * @param userModel
+     * @return
+     */
+    private UserDO convertFromModel(UserModel userModel){
+        if(userModel == null){
+            return null;
+        }
+        UserDO userDO = new UserDO();
+        BeanUtils.copyProperties(userModel, userDO);
+        return userDO;
+    }
+
 
     /**
      * 通过 userDO 和 userPasswordDO 创建  userModel 对象
