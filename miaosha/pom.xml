@@ -179,7 +179,7 @@
             <!-- 允许移动生成的文件 -->
             <verbose>true</verbose>
             <!-- 允许自动覆盖的文件，合作情况千万别！ -->
-            <overwrite>true</overwrite>
+            <overwrite>false</overwrite>
             <!--mybatis generator 的配置路径-->
             <configurationFile>
                 src/main/resources/mybatis-generator.xml
