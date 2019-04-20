@@ -44,7 +44,7 @@
 				success:function(data){
 					if(data.status == "success"){
 						alert("opt已经发送到您的手机上，请注意查收");
-						Window.location.href = "file:///F:/JAVA/miaosha/src/main/resources/view/register.html";
+                        window.location.href = "file:///F:/JAVA/miaosha/src/main/resources/view/register.html";
 					}else{
 						alert("opt发送失败原因为"+data.errorMsg);
 					}
