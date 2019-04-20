@@ -32,3 +32,21 @@
 四、前端
 
 （1）METRONIC静态模板
+
+（2）跨域请求
+
+后端：@CrossOrigin(allowCredentials = "true", allowedHeaders = "*") 
+
+前端：xhrFields:{withCredentials:true},
+
+五、加密
+
+MD5加密：正常16位，容易null，需要自己改写为64位
+
+六、自增id问题
+
+（1）自增id取出赋值时候，默认会变为0，需要在mapper文件中定义
+
+```
+<insert id="insertSelective" parameterType="com.miaoshaproject.dataobject.UserDO" keyProperty="id" useGeneratedKeys="true">
+```

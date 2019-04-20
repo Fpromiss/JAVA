@@ -12,9 +12,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.BASE64Encoder;
 import sun.security.provider.MD5;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 
@@ -23,7 +27,7 @@ import java.util.Random;
  */
 @Controller("user")
 @RequestMapping("/user")
-@CrossOrigin // 解决跨域访问问题
+@CrossOrigin(allowCredentials = "true", allowedHeaders = "*") // 解决跨域访问问题
 public class UserController extends BaseController{
     @Autowired
     private UserService userService;
@@ -40,10 +44,10 @@ public class UserController extends BaseController{
                                      @RequestParam(name = "name")String name,
                                      @RequestParam(name = "gender")String gender,
                                      @RequestParam(name = "age")Integer age,
-                                     @RequestParam(name = "password")String password) throws BusinessException {
+                                     @RequestParam(name = "password")String password) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
         // 验证手机号和对应的otpCode相符合
         String inSessionotpCode = (String) this.httpServletRequest.getSession().getAttribute(telphone); // 获取otpCode
-        if(StringUtils.equals(otpCode, inSessionotpCode)){
+        if(!StringUtils.equals(otpCode, inSessionotpCode)){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "短信验证码不符合");
         }
         // 用户注册流程
@@ -53,12 +57,21 @@ public class UserController extends BaseController{
         userModel.setAge(age);
         userModel.setTelphone(telphone);
         userModel.setRegisterMode("byphone");
-        userModel.setEncrptPassword(MD5Encoder.encode(password.getBytes())); // 密码加密存储
+        userModel.setEncrptPassword(this.EncodeByMD5(password)); // 密码加密存储(java 常规md5只有16位，容易null)
 
         userService.register(userModel);
         return CommonReturnType.create(null);
     }
 
+
+    public String EncodeByMD5(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        // 确定一个计算方法
+        MessageDigest md5 = MessageDigest.getInstance("MD5");
+        BASE64Encoder base64Encoder = new BASE64Encoder();
+        // 加密字符串
+        String newStr = base64Encoder.encode(md5.digest(str.getBytes("utf-8")));
+        return newStr;
+    }
 
     // 用户获取opt短信接口
     @RequestMapping(value = "/getotp",method = {RequestMethod.POST},consumes = {CONTENT_TYPE_FORMED})

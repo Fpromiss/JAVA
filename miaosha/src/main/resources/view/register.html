@@ -54,7 +54,7 @@
 		</div>
 
 		<div class="form-actions">
-			<button class="btn blue" id="getotp" type="submit">
+			<button class="btn blue" id="register" type="submit">
 				提交注册
 			</button>
 		</div>
@@ -64,28 +64,57 @@
 <script>
 	jQuery(document).ready(function(){
 		// 绑定OTP的click时间用于向后端发送获取手机验证码的请求
-		$("#getotp").on("click",function(){
+		$("#register").on("click",function(){
 			var telphone = $("#telphone").val();
+			var password = $("#password").val();
+            var age = $("#age").val();
+            var gender = $("#gender").val();
+            var name = $("#name").val();
+            var otpCode = $("#otpCode").val();
+            // 校验规则
 			if(telphone == null || telphone == ""){
 				alert("手机号不能为空！");
 				return false;
 			}
+            if(password == null || password == ""){
+                alert("密码不能为空！");
+                return false;
+            }
+            if(age == null || age == ""){
+                alert("年龄不能为空！");
+                return false;
+            }
+            if(gender == null || gender == ""){
+                alert("性别不能为空！");
+                return false;
+            }
+            if(otpCode == null || otpCode == ""){
+                alert("otpCode不能为空！");
+                return false;
+            }
 			$.ajax({
 				type:"POST",
 				contentType:"application/x-www-form-urlencoded",
 				url:"http://localhost:8090/user/register",
 				data:{
 					"telphone":$("#telphone").val(),
+					"password":password,
+					"age":age,
+					"gender":gender,
+					"otpCode":otpCode,
+					"name":name
 				},
+                // 允许跨域请求，使得跨域请求ok
+                xhrFields:{withCredentials:true},
 				success:function(data){
 					if(data.status == "success"){
-						alert("opt已经发送到您的手机上，请注意查收");
+						alert("注册成功");
 					}else{
-						alert("opt发送失败原因为"+data.errorMsg);
+						alert("注册失败，原因为："+data.errMsg);
 					}
 				},
 				error:function(data){
-					alert("opt发送失败，原因为："+data.responseText);
+					alert("注册失败，原因为："+data.responseText);
 				}
 			});	
 			return false;

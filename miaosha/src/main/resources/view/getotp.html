@@ -41,12 +41,14 @@
 				data:{
 					"telphone":$("#telphone").val(),
 				},
+				// 允许跨域请求，使得跨域请求ok
+				xhrFields:{withCredentials:true},
 				success:function(data){
 					if(data.status == "success"){
 						alert("opt已经发送到您的手机上，请注意查收");
                         window.location.href = "file:///F:/JAVA/miaosha/src/main/resources/view/register.html";
 					}else{
-						alert("opt发送失败原因为"+data.errorMsg);
+						alert("opt发送失败原因为"+data.errMsg);
 					}
 				},
 				error:function(data){
