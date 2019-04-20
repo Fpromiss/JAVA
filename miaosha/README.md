@@ -50,3 +50,9 @@ MD5加密：正常16位，容易null，需要自己改写为64位
 ```
 <insert id="insertSelective" parameterType="com.miaoshaproject.dataobject.UserDO" keyProperty="id" useGeneratedKeys="true">
 ```
+
+七、hibernate-validator
+
+hibernate-validator做校验优化
+
+效果：只需要在所需要校验的model上添加注解即可
