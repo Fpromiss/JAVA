@@ -141,6 +141,18 @@ public class ItemServiceImpl implements ItemService {
     }
 
 
+    @Override
+    @Transactional
+    public boolean decreaseStock(Integer itemId, Integer amount) throws BusinessException {
+        int affectRow = itemStockDOMapper.decreaseStock(itemId, amount);
+        if(affectRow>0){
+            // 更新库存成功
+            return true;
+        }
+        return false;
+    }
+
+
     /**
      * itemDO , itemStockDO -> itemModel
      *

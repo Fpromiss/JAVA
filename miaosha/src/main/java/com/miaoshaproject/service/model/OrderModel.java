@@ -3,7 +3,7 @@ package com.miaoshaproject.service.model;
 import java.math.BigDecimal;
 
 // 用户下单的交易模型
-public class orderModel {
+public class OrderModel {
     // 交易号 比如20190421ABCDEF
     private String id;
 
