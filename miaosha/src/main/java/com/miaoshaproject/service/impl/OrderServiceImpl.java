@@ -76,6 +76,9 @@ public class OrderServiceImpl implements OrderService {
         OrderDO orderDO = this.convertFromOrderModel(orderModel);
         orderDOMapper.insertSelective(orderDO);
 
+        // 加上商品销量
+        itemService.increaseSales(itemId, amount);
+
         // 返回前端
         return orderModel;
     }
