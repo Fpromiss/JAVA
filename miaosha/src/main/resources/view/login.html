@@ -40,8 +40,8 @@
 <script>
 	jQuery(document).ready(function(){
         $("#register").on("click",function(){
-            window.location.href = "getotp.hmtl";
-        }
+            window.location.href = "getotp.html";
+		});
 
 		// 绑定OTP的click时间用于向后端发送获取手机验证码的请求
 		$("#login").on("click",function(){
@@ -69,6 +69,7 @@
 				success:function(data){
 					if(data.status == "success"){
 						alert("登录成功");
+						window.location.href="listitem.html";
 					}else{
 						alert("登录失败，原因为："+data.data.errorMsg);
 					}
