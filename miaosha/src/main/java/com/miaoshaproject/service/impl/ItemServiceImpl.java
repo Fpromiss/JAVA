@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -65,6 +66,14 @@ public class ItemServiceImpl implements ItemService {
         return itemStockDO;
     }
 
+
+    /**
+     * 创建商品
+     *
+     * @param itemModel
+     * @return
+     * @throws BusinessException
+     */
     @Override
     @Transactional
     public ItemModel createItem(ItemModel itemModel) throws BusinessException {
@@ -89,11 +98,33 @@ public class ItemServiceImpl implements ItemService {
         return this.getItemById(itemModel.getId());
     }
 
+
+    /**
+     * 简单查询所有item 通过sales倒叙排序
+     *
+     * @return
+     */
     @Override
     public List<ItemModel> listItem() {
-        return null;
+        List<ItemDO> itemDOList = itemDOMapper.listItem();
+        // 使用stream方法让 itemDO map 成 itemModel
+        List<ItemModel> itemModelList = itemDOList.stream().map(
+                itemDO -> {
+                    ItemStockDO itemStockDO = itemStockDOMapper.selectByItemId(itemDO.getId());
+                    ItemModel itemModel = this.convertModelFromDataObject(itemDO, itemStockDO);
+                    return itemModel;
+                }
+        ).collect(Collectors.toList());
+        return itemModelList;
     }
 
+
+    /**
+     * 通过item id 获取 item
+     *
+     * @param id
+     * @return
+     */
     @Override
     public ItemModel getItemById(Integer id) {
         ItemDO itemDO = itemDOMapper.selectByPrimaryKey(id);
@@ -110,6 +141,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
 
+    /**
+     * itemDO , itemStockDO -> itemModel
+     *
+     * @param itemDO
+     * @param itemStockDO
+     * @return
+     */
     private ItemModel convertModelFromDataObject(ItemDO itemDO, ItemStockDO itemStockDO){
         ItemModel itemModel = new ItemModel();
         BeanUtils.copyProperties(itemDO, itemModel);
