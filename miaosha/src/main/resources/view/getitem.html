@@ -73,7 +73,7 @@
 	jQuery(document).ready(function() {
 	    $("#createorder").on("click",function () {
             $.ajax({
-                type: "GET",
+                type: "POST",
                 contentType:"application/x-www-form-urlencoded",
                 url: "http://localhost:8090/order/createorder",
                 data: {
@@ -87,6 +87,10 @@
 						alert("下单成功");
                     } else {
                         alert("下单失败，原因为：" + data.data.errorMsg);
+                        if(data.data.errorCode == 20003){
+                            window.location.href = "login.html";
+						}
+
                     }
                 },
                 error: function (data) {
