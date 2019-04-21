@@ -60,7 +60,7 @@ public class ItemServiceImpl implements ItemService {
             return null;
         }
         ItemStockDO itemStockDO = new ItemStockDO();
-        itemStockDO.setId(itemModel.getId());
+        itemStockDO.setItemId(itemModel.getId());
         itemStockDO.setStock(itemModel.getStock());
         return itemStockDO;
     }
@@ -75,7 +75,7 @@ public class ItemServiceImpl implements ItemService {
         }
 
         // 转化itemModel -> dataObject
-        ItemDO itemDO = convertItemDOFromItemModel(itemModel);
+        ItemDO itemDO = this.convertItemDOFromItemModel(itemModel);
 
         // 写入数据库
         itemDOMapper.insertSelective(itemDO);

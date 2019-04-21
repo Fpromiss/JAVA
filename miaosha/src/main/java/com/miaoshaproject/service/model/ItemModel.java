@@ -31,7 +31,7 @@ public class ItemModel {
 
     // 商品描述的URL
     @NotBlank(message = "商品图片信息不能为空")
-    private String url;
+    private String imgUrl;
 
     public Integer getId() {
         return id;
@@ -81,11 +81,11 @@ public class ItemModel {
         this.sales = sales;
     }
 
-    public String getUrl() {
-        return url;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

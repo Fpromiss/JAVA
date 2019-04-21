@@ -9,13 +9,11 @@ import com.miaoshaproject.service.model.ItemModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
-@Controller("/item")
+@Controller("item")
 @RequestMapping("/item")
 @CrossOrigin(allowCredentials = "true", allowedHeaders = "*") // 解决跨域访问问题
 public class ItemController extends BaseController {
@@ -24,25 +22,44 @@ public class ItemController extends BaseController {
     private ItemService itemService;
 
     // 创建商品的controller
+    @RequestMapping(value = "/create",method = {RequestMethod.POST},consumes = {CONTENT_TYPE_FORMED})
+    @ResponseBody
     public CommonReturnType createItem(@RequestParam(name ="title")String title,
                                         @RequestParam(name ="description")String description,
                                         @RequestParam(name ="price") BigDecimal price,
                                         @RequestParam(name ="stock")Integer stock,
-                                        @RequestParam(name ="url")String url) throws BusinessException {
+                                        @RequestParam(name ="imgUrl")String imgUrl) throws BusinessException {
         // 封装service请求用来创建商品
         ItemModel itemModel = new ItemModel();
         itemModel.setTitle(title);
         itemModel.setDescription(description);
         itemModel.setPrice(price);
         itemModel.setStock(stock);
-        itemModel.setUrl(url);
+        itemModel.setImgUrl(imgUrl);
 
         ItemModel itemModel1ForReturn = itemService.createItem(itemModel);
 
+        System.out.println(itemModel1ForReturn.toString());
+
         ItemVO itemVO = convertItemVOFromModel(itemModel1ForReturn);
+
+        System.out.println(itemVO.toString());
 
         return CommonReturnType.create(itemVO);
     }
+
+
+    // 商品详情页浏览
+    @RequestMapping(value = "/get",method = {RequestMethod.POST})
+    @ResponseBody
+    public CommonReturnType getItem(@RequestParam(name = "id")Integer id){
+        ItemModel itemModel = itemService.getItemById(id);
+
+        ItemVO itemVO = convertItemVOFromModel(itemModel);
+
+        return CommonReturnType.create(itemVO);
+    }
+
 
     private ItemVO convertItemVOFromModel(ItemModel itemModel){
         if(itemModel == null){
