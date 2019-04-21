@@ -57,10 +57,14 @@
 	function reloadDom() {
 	    for(var i = 0; i<g_itemList.length;i++){
 	        var itemVO = g_itemList[i];
-            	var dom = "<tr><td>"+itemVO.title+"</td><td><img src='"+itemVO.imgUrl+"'/></td><td>"+itemVO.description+"<" +
+            	var dom = "<tr data-id='"+itemVO.id+"' id='itemDetail"+itemVO.id+"'><td>"+itemVO.title+"</td><td><img width='80' height='60' src='"+itemVO.imgUrl+"'/></td><td>"+itemVO.description+"<" +
 					"/td><td>"+itemVO.price+"</td><td>"+itemVO.stock+"</td><td>"+itemVO.sales+"</td></tr>"
 			var contain =  $("#container");
             contain.append($(dom));
+
+            $("#itemDetail"+itemVO.id).on("click",function(e){
+                window.location.href = "getitem.html?id="+$(this).data("id");
+			});
 		}
 
     }
