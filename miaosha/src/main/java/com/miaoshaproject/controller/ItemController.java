@@ -85,6 +85,16 @@ public class ItemController extends BaseController {
         }
         ItemVO itemVO = new ItemVO();
         BeanUtils.copyProperties(itemModel, itemVO);
+        if(itemModel.getPromoModel()!=null){
+            // 有正在进行或者即将进行的秒杀活动
+            itemVO.setPromoStatues(itemModel.getPromoModel().getStatues());
+            itemVO.setPromoId(itemModel.getPromoModel().getId());
+            itemVO.setStartDate(itemModel.getPromoModel().getStartDate());
+            itemVO.setPromoPrice(itemModel.getPromoModel().getPromoItemPrice());
+        }else{
+            itemVO.setPromoStatues(0);
+        }
+
         return itemVO;
     }
 }

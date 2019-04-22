@@ -56,3 +56,7 @@ MD5加密：正常16位，容易null，需要自己改写为64位
 hibernate-validator做校验优化
 
 效果：只需要在所需要校验的model上添加注解即可
+
+八、joda-time
+
+使用joda-time 用于时间相关处理
