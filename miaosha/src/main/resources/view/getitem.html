@@ -32,7 +32,7 @@
 			</div>
 		</div>
 
-		<div class="form-group">
+		<div id="normalPriceContainer" class="form-group">
 			<label class="control-label">价格</label>
 			<div>
 				<label class="control-label" id="price"/>
@@ -167,6 +167,7 @@
             $("#promoPrice").text(g_itemVO.promoPrice);
 
             $("#createorder").attr("disabled",false);
+            $("#normalPriceContainer").hide();
 		}
     }
 
