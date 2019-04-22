@@ -17,6 +17,7 @@ public class PromoServiceImpl implements PromoService {
     @Autowired
     private PromoDOMapper promoDOMapper;
 
+
     @Override
     public PromoModel getPromoByItemId(Integer itemId) {
         // 获取对应商品的秒杀信息
@@ -42,7 +43,7 @@ public class PromoServiceImpl implements PromoService {
             promoModel.setStatues(2);
         }
 
-        return null;
+        return promoModel;
     }
 
 
